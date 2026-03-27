@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | test-yan-4 - Enterprise AI Strategy</title>
+    <meta name="description" content="Access your enterprise AI strategy roadmap and initiative portfolio. Sign in to test-yan-4.">
+    
+    <!-- Google Fonts: Inter with thin weights -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap');
+
+        :root {
+            /* BRAND COLORS */
+            --color-primary: #DA2128;
+            --color-primary-dark: #B91C22; /* 15% darker than #DA2128 */
+            --color-accent: #FFFFFF;
+            
+            /* SYSTEM COLORS - Modern Minimalist Light */
+            --color-background: #FDFDFD;
+            --color-surface: #FFFFFF;
+            --color-text: #111111;
+            --color-text-muted: #666666;
+            --color-border: #E5E5E5;
+            
+            /* TYPOGRAPHY */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            
+            /* SPACING & RADIUS */
+            --radius-card: 32px;
+            --radius-btn: 50px;
+            --container-max: 1200px;
+            --section-padding: 100px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-weight: 500;
+            font-size: 1.25rem;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .cta-header {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-btn);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .cta-header:hover {
+            background-color: var(--color-primary-dark);
+        }
+
+        /* AUTH SECTION */
+        .auth-wrapper {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+        }
+
+        .auth-card {
+            background: var(--color-surface);
+            width: 100%;
+            max-width: 480px;
+            padding: 3.5rem;
+            border-radius: var(--radius-card);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .auth-header h1 {
+            font-weight: 200;
+            font-size: 2.25rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header h1 i {
+            font-style: italic;
+            font-weight: 100;
+        }
+
+        .auth-header p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* TABS */
+        .tab-nav {
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 2.5rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 1rem;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-primary);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* FORMS */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            transition: border-color 0.2s ease, outline 0.2s ease;
+            background-color: #fafafa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background-color: #fff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.1rem;
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            border: none;
+            border-radius: var(--radius-btn);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--color-primary-dark);
+        }
+
+        .success-msg {
+            padding: 1rem;
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 1px solid var(--color-border);
+            padding: 5rem 2rem 3rem;
+            background: #fff;
+        }
+
+        .footer-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand h2 {
+            font-weight: 200;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: var(--color-text-muted);
+            max-width: 300px;
+            font-size: 0.9rem;
+        }
+
+        .footer-nav h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-list a {
+            text-decoration: none;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-list a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            max-width: var(--container-max);
+            margin: 4rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-icons svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-text-muted);
+            transition: fill 0.2s ease;
+            cursor: pointer;
+        }
+
+        .social-icons svg:hover {
+            fill: var(--color-primary);
+        }
+
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+            .auth-card { padding: 2rem; }
+            .auth-header h1 { font-size: 1.75rem; }
+        }
+    </style>
+  <base href="/enterprise-ai-strategy/" />
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAIWUlEQVR4AaxXeYxV1Rn/ffe+bd4bmH2AgUEGBCvUAayyZBrKUmod26IiEqplkU0bMBBa2rgQQaFgSkhKKdJq06BpaRqbYhOs2kBNG61LahkWtbNvzMbMY/a33Ptuf+e8N8N7857pP73vfuc7y7ef737nPMNxIs5NYDfDG4vF9GzfubecKl+ec8mT51z2F6bAJV++c1ECTverv9O0sVicRw/Smps6DSQ/jhMfKZwAJxaDiGC46goa1j6MvM3rMen4URQf3I8JPzmgofjQfkw69iKK9u5Cy9btGPznh5rHsW0gIUdjJV2NFU6AkcBxREW6o/AI6Akg2taKaH8vclY/iIJtm1D45OOEJ0ah4PHNyFv/PcRCQ4i2tsa5RmSMYDWr+gon4KYB9DR09VNYn32O0OUrKRCpb4DV1Q0TPkQaGhCurcPwxUs34d9VCP2nBmHyGoYPVk+QdI0pMpRMLZs6QF0J/Rg1IDY8jIbvPIy6ZfeibuW3R6H+nlWoXrwMHT/eB9+s29D57AuoqViBhsoHUP/NVRoaKu9H7ZKVaN25B94Z09F14DCqFy2F4k2WpWQrHUpXmgGAwAj4CYGMIF4vdD54PRnWs2EGAhAfabjH4slEMyLXD1AXEs9oBBLjL0Zq7ygcCmegUukrIvGkUzgDTaapFANEhPJF0/HL0VhE9JyI6LFqROL9ERo1NwIi8bWRcTIWES0reS7FgOQFMUyQGkqJiMQ9Ax+DLGqsu6QhVq9hxvuKPnmsZEDIoyYzQIYVKoMwk7tg9/UCFDwiVCjIut4Je6CPogSRrjY40QgQsxHpaCOOaXqV5dGuDtJwamAAVrALQl49MaZJM8ChMCW09MyryFmzGlZbO4RGgJ5HO9ox8cVDKNz5fdihAZS9/Sa8s2+Hu+wWTD3zGuz+fsQIxvjxmPr67+EYDnI3PIIpv3pJr43RrYdpBjDmgAgC8+eh+Om9kHEBemnRiyC8d5ajcMsmuEsmAoYge8FXYObnAS4TOfd+A5OOHmHBagLcLoxbUgG4hJ9lGQKLFsKxbC0aYx5jzHh0aPX2wTNpIvI3bYDV0UEjwij6wW697kSjUNJU5sNm2Nnhi/z161D0o73cjmtwOI2YA4edGOnpk/KLfFrEaJPRAGG4QaYQK17R7p2A1wV/xWL4586F1dcPw+fTAkS3Dky/n2fFJXQcP4GSwweRt2YN7GAQwkQWEYiSp2nTm4wGKDLF1Pn8IYjfh6J9T6HgyR24fuIkS2wD4HHTE+UzKYkc1gfX+HFo3/ND9J57C5OPHoaZl8uoRRkBRcNIEGV6jUyTquKZubnM8k50nTyFCbt2ws29VgZ4pkyBDrtInJW5QGsAlweu7AI0b3wMQ1VVMGikUisiUM4oS2grIEh5jJSRHsQpLH6CpgX0HD8JKxRC10+P8UiMwR4OwQlHoIy0VWJF6KXF+d5eGP4sfixuNK59FKHaehrhIf1Q/AsQGatba0szQEwD4nKj4b7VCNc3kclE9Zy7MPjeR/CUlqJ+RSU6jxyDKzAeNeV3I1R1GZHPa9D00CN6u4ycXDh9Q6hfXslIGej5xStofGAdTG6R1jimMcaME0MGK0Ivw/R2aBix4A0YpkljuBwKw+kfgH2jD3fafjD77666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
