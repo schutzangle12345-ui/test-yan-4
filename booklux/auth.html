@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | BookLux - AI Luxury Concierge</title>
+    <meta name="description" content="Access your BookLux account to manage your luxury travel and service bookings.">
+    
+    <!-- Google Fonts: Inter for modern minimalist feel -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+        :root {
+            /* BRAND COLORS */
+            --color-primary: #DA2128;
+            --color-primary-dark: #B91C22; /* 15% darker than #DA2128 */
+            --color-accent: #FFFFFF;
+            
+            /* SYSTEM COLORS */
+            --color-background: #FDFDFD;
+            --color-surface: #FFFFFF;
+            --color-text: #111111;
+            --color-text-muted: #666666;
+            --color-border: #E5E5E5;
+            
+            /* TYPOGRAPHY */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            
+            /* SPACING & RADIUS */
+            --radius-lg: 24px;
+            --radius-sm: 8px;
+            --container-max: 1200px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            padding: 1.25rem 2rem;
+        }
+
+        .nav-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-weight: 200;
+            font-size: 1.5rem;
+            color: var(--color-text);
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+        }
+
+        .cta-nav {
+            background-color: var(--color-text);
+            color: var(--color-accent);
+            padding: 0.8rem 1.8rem;
+            border-radius: 100px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .cta-nav:hover {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1.5rem;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+        }
+
+        .auth-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.5rem;
+            text-align: left;
+        }
+
+        .auth-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .auth-header h1 {
+            font-weight: 100;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: var(--color-text-muted);
+            font-weight: 300;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-primary);
+        }
+
+        /* FORMS */
+        .auth-form {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .auth-form.active {
+            display: flex;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        button[type="submit"] {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            border: none;
+            padding: 1.25rem;
+            border-radius: 100px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        button[type="submit"]:disabled {
+            background-color: var(--color-text-muted);
+            cursor: not-allowed;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: 4rem 2rem;
+        }
+
+        .footer-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        .footer-brand {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-brand p {
+            margin-top: 1rem;
+            color: var(--color-text-muted);
+            max-width: 300px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 4rem;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-column h4 {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            text-decoration: none;
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--color-primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-icons svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-text-muted);
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover svg {
+            fill: var(--color-primary);
+        }
+
+        .footer-bottom {
+            max-width: var(--container-max);
+            margin: 4rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 768px) {
+            header { padding: 1rem; }
+            nav { display: none; }
+            .auth-card { padding: 2rem 1.5rem; }
+            .footer-links { gap: 2rem; }
+            .footer-container { flex-direction: column; }
+        }
+    </style>
+  <base href="/booklux/" />
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="data:image/png;base64,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" alt="test-yan-4 logo">
+                <span class="logo-text">BookLux</span>
+            </a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="auth.html" class="cta-nav">Sign In</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Welcome</h1>
+                <p>The gateway to absolute luxury.</p>
+            </div>
+            
+            <div class="auth-card">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('signup')">Sign Up</button>
+                    <button class="tab-btn" onclick="switchTab('signin')">Sign In</button>
+                </div>
+
+                <!-- SIGN UP FORM -->
+                <form id="signup-form" class="auth-form active" data-backend="signup">
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" name="email" placeholder="concierge@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" minlength="6" placeholder="Min. 6 characters" required>
+                    </div>
+                    <input type="hidden" name="role" value="user">
+                    
+                    <button type="submit">Create Account</button>
+                    <p data-success style="display:none; color: #28a745; font-weight: 600; margin-top: 1.5rem; text-align: center; border: 1px solid #28a745; padding: 1rem; border-radius: var(--radius-sm);">
+                        Registration successful! Taking you to login...
+                    </p>
+                </form>
+
+                <!-- SIGN IN FORM -->
+                <form id="signin-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="signin-email">Email Address</label>
+                        <input type="email" id="signin-email" placeholder="Your email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-password">Password</label>
+                        <input type="password" id="signin-password" placeholder="Your password" required>
+                    </div>
+                    <button type="submit">Sign In</button>
+                    <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-text-muted); text-align: center;">
+                        <a href="#" style="color: var(--color-text-muted); text-decoration: none;">Forgot password?</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <img src="data:image/png;base64,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
